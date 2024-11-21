@@ -75,7 +75,7 @@ breedSelect.addEventListener("change", (event) => {
  * - Each new selection should clear, re-populate, and restart the Carousel.
  * - Add a call to this function to the end of your initialLoad function above to create the initial carousel.
  */
-
+/* 
 async function handleBreedSelection(breedId) {
   try {
     const response = await axios.get(`/images/search`, {
@@ -106,7 +106,7 @@ async function handleBreedSelection(breedId) {
 breedSelect.addEventListener("change", (event) => {
   handleBreedSelection(event.target.value);
 });
-
+ */
 /**
  * 3. Fork your own sandbox, creating a new one named "JavaScript Axios Lab."
  */
