@@ -76,6 +76,37 @@ breedSelect.addEventListener("change", (event) => {
  * - Add a call to this function to the end of your initialLoad function above to create the initial carousel.
  */
 
+async function handleBreedSelection(breedId) {
+  try {
+    const response = await axios.get(`/images/search`, {
+      params: { breed_ids: breedId, limit: 10 },
+    });
+
+    const breedInfo = response.data[0].breeds[0];
+    Carousel.clear();
+    response.data.forEach((image) => {
+      const imgElement = Carousel.createCarouselItem(image.url);
+      Carousel.appendCarousel(imgElement);
+    });
+
+    // Update breed information
+    infoDump.innerHTML = `
+      <h2>${breedInfo.name}</h2>
+      <p>${breedInfo.description}</p>
+      <p><strong>Origin:</strong> ${breedInfo.origin}</p>
+      <p><strong>Temperament:</strong> ${breedInfo.temperament}</p>
+    `;
+
+    Carousel.start();
+  } catch (error) {
+    console.error("Error fetching breed data:", error);
+  }
+}
+
+breedSelect.addEventListener("change", (event) => {
+  handleBreedSelection(event.target.value);
+});
+
 /**
  * 3. Fork your own sandbox, creating a new one named "JavaScript Axios Lab."
  */
